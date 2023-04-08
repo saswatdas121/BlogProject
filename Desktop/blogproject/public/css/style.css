@@ -1,0 +1,151 @@
+
+.links
+{
+   display:flex;
+   justify-content:space-around;
+   align-items:center;
+   list-style:none;
+   font-family: 'Rubik', sans-serif;
+   font-size:17px
+}
+
+ul li a
+{
+    text-decoration:none;
+    color:black;
+}
+
+#logo
+{
+    height:100px;
+    width:100px;
+}
+
+.total
+{
+    display:flex;
+}
+
+.logo
+{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family: 'Maven Pro', sans-serif;
+    font-size:37px;
+
+}
+
+.footer
+{
+    font-family: 'Rubik', sans-serif;
+   font-size:17px;
+}
+
+.main-container
+{
+    display:flex;
+    margin:0px;
+    justify-content: space-around;
+    /* border:2px solid black; */
+}
+.sub-container
+{
+    /* border:2px solid black; */
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content: space-around;
+    text-align:center;
+}
+.heading
+{
+    /* border:2px solid black; */
+    font-weight:bold;
+    font-size:50px;
+    display:flex;
+    align-items:center;
+
+}
+.image-container{
+    /* border:2px solid black; */
+    border-radius: 23% 31% 30% 67% / 72% 47% 40% 26%;
+    width: 600px;
+    height: auto;
+    background: linear-gradient(#a03692, #b46ca8, #c0aec5);
+    overflow: hidden;
+    animation: animateImg 8s linear infinite;
+    
+
+}
+.content
+{
+    font-size:21px;
+    font-family: 'Rubik', sans-serif;
+    text-align:center;
+}
+
+.category_link
+{
+    text-align:center;
+    text-decoration:none;
+    transition:250ms all;
+    color:black;
+    font-family: 'Rubik', sans-serif;
+
+}
+
+.category_link:hover
+{
+    transform:scale(1.1);
+}
+
+.category_image
+{
+    display:flex;
+    justify-content:center;
+    align-itms:center;
+    height:100px;
+    margin-bottm:10px;
+    box-shadow:0px 3px 6px rgba(0,0,0,.16);
+    overflow:hidden;
+    border-radius:8px;
+
+}
+
+.category_img img
+{
+    width:100%;
+    object-fit:cover;
+}
+
+.card-container
+{
+    display:flex;
+    margin-top: 44px;
+    justify-content:center;
+
+}
+.blogs-container
+{
+    display:flex;
+    justify-content:center;
+
+}
+
+.buttons
+{
+    width:100%;
+    display:flex;
+    justify-content:space-evenly;
+
+}
+.blogsContent
+{
+    display:flex;
+    justify-content:center;
+    font-family:'Rubik', sans-serif;
+    font-size:17px;
+
+}
+

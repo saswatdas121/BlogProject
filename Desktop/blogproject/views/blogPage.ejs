@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('head') %>
+<body>
+ <%- include('navbar') %>
+
+   <div style="font-size:15px;text-decoration: underline;">
+    <a href="/home" style="text-decoration: none;color:black">Home/</a> <a href="/home" style="text-decoration: none;color:black">Categories/</a><span style="font-family:'Rubik', sans-serif; "><%= blog[0].title %>></span>
+   </div>
+   <div style="margin-bottom:50px">
+   <div style="text-align: center;font-size:40px;font-weight:bold;">
+    <%= blog[0].title %>
+        
+   </div>
+   <div style="text-align: center;font-size:20px;">
+    Author Name- <%= blog[0].authorName %>
+   </div>
+
+   <div style="text-align: center;font-size:20px;">
+    Author Name- <%= blog[0].date %>
+   </div>
+
+</div>
+   
+   <div style="display:flex;">
+    <img src="<%= blog[0].imagePath %>" alt="No image">
+    <div class="blogsContent" style="margin:20px">
+        <%=blog[0].description %>
+    </div>
+   </div>
+</body>
+</html>

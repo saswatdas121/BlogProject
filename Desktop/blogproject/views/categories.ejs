@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('head') %>
+<body>
+ <%- include('navbar') %>
+
+   <div style="font-size:15px;text-decoration: underline;">
+    <a href="/home" style="text-decoration: none;color:black">Home/</a><span style="font-family:'Rubik', sans-serif; ">Categories></span>
+   </div>
+   <div>
+    <div class="row row-cols-2 row-cols-lg-6 g-2 g-lg-3 py-4 card-container">
+        <% for(const category of dataArray) { %>
+
+        <a href="category/<%=category.name%>" class="col text-center category_link " >
+          <div class="category_img shadow" >
+            <img src="<%= category.imagePath %>" alt=" " style="height:150px">
+          </div>
+          <div>
+            <%= category.name %>
+          </div>
+
+         
+        </a>
+
+        <% } %>
+   </div>  
+</body>
+</html>
