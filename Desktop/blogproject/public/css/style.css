@@ -39,7 +39,8 @@ ul li a
 .footer
 {
     font-family: 'Rubik', sans-serif;
-   font-size:17px;
+   font-size:15px;
+    text-align:center;  
 }
 
 .main-container
@@ -144,6 +145,9 @@ ul li a
 {
     display:flex;
     justify-content:center;
+    text-align:center;
+    padding:20px;
+    margin:30px;
     font-family:'Rubik', sans-serif;
     font-size:17px;
 

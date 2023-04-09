@@ -7,16 +7,24 @@
  <div class="px-4 py-5 my-5 text-center">
     <h1 class="display-5 fw-bold">Submit Your Blogs</h1>
     <div class="col-lg-6 mx-auto">
-      <p class="lead">Share your amazing recipies with thousands of web developers accross the world. Fill our form to get started.</p>
+      <p class="lead">Share your amazing blogs with thousands of readers accross the world. Fill our form to get started.</p>
     </div>
+    
   </div>
   
-  <div class="row justify-content-center">
   
+  <div class="row justify-content-center">
+    
   
     <div class="col-8">
-  
-      <form action="/submit-recipe" enctype="multipart/form-data" method="POST">
+
+      <% if(error!='') {%>
+      <div class="alert alert-danger" role="alert">
+      <%= error %>
+      </div>
+
+      <% } %>
+      <form action="/submitrecipe" enctype="multipart/form-data" method="POST">
       
         <div class="row g-3">
 
@@ -27,26 +35,26 @@
   
           <div class="col-12">
             <label for="email" class="form-label">Email</label>
-            <input type="email" name="email" id="email" class="form-control">
+            <input type="email" name="email" id="email" class="form-control" required>
           </div>
   
           <div class="col-12">
-            <label for="name" class="form-label">Blog Title</label>
-            <input type="text" name="name" id="name" class="form-control" required>
-          </div>
+            <label for="title" class="form-label">Blog Title</label>
+             <input type="text" name="title" id="title" class="form-control" required><!--In form where there are name attributes that values are only passed when submitting a form  -->
+           </div> 
           
           <div class="col-12">
             <label for="description" class="form-label">Description</label>
-            <textarea name="description" id="description" class="form-control" cols="30" rows="4"></textarea>
+            <textarea name="description" id="description" class="form-control" cols="20" rows="40" style="resize: none;" required></textarea>
           </div>
   
           <div class="col-12">
             <label for="category">Select Category</label>
-            <select class="form-select form-control" name="category" aria-label="Category">
+            <select class="form-select form-control" name="category" aria-label="Category"  required>
               <option selected>Select Category</option>
               <option value="Artificial Intelligence">Artificial Intelligence</option>
               <option value="Blockchain">Blockchain</option>
-              <option value="Mexican">Deep Learning</option>
+              <option value="Deep Learning">Deep Learning</option>
               <option value="Internet of Things">Internet of Things</option>
               <option value="Machine Learning">Machine Learning</option>
               <option value="Web Development">Web Development</option>
@@ -58,7 +66,7 @@
   
           <div class="col-12">
             <label for="image">Image</label>
-            <input type="file" class="form-control" name="image" accept="image/*">
+            <input type="file" class="form-control" name="image" accept=".jpg,.png,.jpeg "  required>
           </div>
   
           <div class="col-12">

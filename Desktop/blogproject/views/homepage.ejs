@@ -26,7 +26,7 @@
 
         <a href="/categories" class="col text-center category_link " >
           <div class="category_img shadow" >
-            <img src="img/exploremore.jpg" alt=" " style="height:150px;opacity: calc(0.5);">
+            <img src="/img/exploremore.jpg" alt=" " style="height:150px;opacity: calc(0.5);">
           </div>
           <div>
             Explore all categories 
@@ -39,11 +39,11 @@
         <% for(const blogs of latestBlogs) { let desc=blogs.description.substring(0,100)+'...' %>
 
           <div class="card category_link" style="width: 15rem;margin:20px;">
-            <img class="card-img-top" src="<%= blogs.imagePath %>" alt="Card image cap">
+            <img class="card-img-top" src="<%=blogs.imagePath %>" alt="Card image cap">
             <div class="card-body">
               <h5 class="card-title"><%=blogs.title %></h5>
               <p class="card-text"><%= desc %></p>
-              <a href="blogs/<%= blogs._id %>" class="btn btn-dark">Read More</a>
+              <a href="/blogs/<%= blogs._id %>" class="btn btn-dark">Read More</a>
             </div>
           </div>
 
@@ -54,7 +54,7 @@
         
          
 
-      <div class="footer py-5">
+      <div class="footer py-3" style="background-color: black;color:white;">
         Made by Saswat
       </div>
     </div>

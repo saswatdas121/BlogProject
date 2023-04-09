@@ -4,8 +4,24 @@ const express=require('express');
 const router=express.Router();//Express Routers are a way to organize your Express application such that your primary app.js file does not become bloated and difficult to reason about
 const blogsController=require('../controllers/recipeController');
 
+const path=require('path');
 
-const db=require('../models/database');
+const multer=require('multer');
+
+const storageConfig=multer.diskStorage({
+    destination:function(req,file,cb)
+    {
+        cb(null,'public/img');
+    },//Where you file will be saved 
+    filename:function(req,file,cb)
+    {
+       cb(null,Date.now()+'-'+file.originalname);
+    }//Name of you file
+  });
+
+
+
+const upload=multer({storage:storageConfig});
 
 
 router.get('/home',blogsController.homepage);
@@ -18,4 +34,10 @@ router.get('/category/:id',blogsController.totalBlogsPage)
 
 router.get('/submit',blogsController.submitForm)
 
-module.exports=router;
+router.post('/submitrecipe',upload.single('image'),blogsController.submitRecipe)
+
+router.get('/submitPage',blogsController.submitPage);
+
+router.get('/about',blogsController.about);
+
+module.exports=router; 
