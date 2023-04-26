@@ -2,6 +2,8 @@
 const mongodb=require('mongodb');
 const db = require('../models/database');
 const { use } = require('../routes/recipeRoutes');
+const bcrypt=require('bcryptjs');
+
 
 const ObjectId=mongodb.ObjectId;
 
@@ -117,6 +119,146 @@ exports.submitPage=(req,res)=>
 exports.about=(req,res)=>
 {
     res.render('about')
+}
+
+exports.login=(req,res)=>
+{
+    res.render('login');
+}
+
+exports.loginPost=async (req,res)=>
+{
+    const userData=req.body;
+
+    let email=userData.email;
+    let password=userData.password;
+
+    let emailCheck=await db.getDb().collection('users').findOne({email:email});
+
+    if(!emailCheck)
+    {
+        console.log("Email Doesnt Exist.Please Give valid credentials");
+        return;
+    }
+    
+    let passwordCheck=emailCheck.password;
+
+    let comparePassword=bcrypt.compare(password,passwordCheck);
+
+    if(!comparePassword)
+    {
+        console.log("Please Enter Valid Credentials");
+        return;
+    }
+
+    req.session.user={
+        email:email,
+        id:emailCheck._id
+    }
+
+    req.session.save(function()
+    {
+        res.redirect('/home');
+    })
+    
+
+}
+
+exports.signup=(req,res)=>
+{
+    let tempData=req.session.tempData;
+    req.session.tempData={
+            fname:'',
+            lname:'',
+            email:'',
+            confirmEmail:'',
+            password:'' 
+    }
+    //We are doing the above thing as we are deleting the data which is present in the session after showing it one time.If we dont delete it iwt will keep on showing it
+    res.render('signup',{tempData:tempData});
+}
+
+exports.signupUser=async (req,res)=>
+{
+    const userData=req.body;
+
+    let fname=userData.fname;
+    let lname=userData.lname;
+    let email=userData.email;
+    let confirmEmail=userData['confirm-email'];
+    let password=userData.password;
+    //place
+    //add about but not in form
+
+    if(password.trim().length<6 || email!==confirmEmail)
+    {
+        req.session.tempData={
+            fname:fname,
+            lname:lname,
+            email:email,
+            confirmEmail:confirmEmail,
+            password:password,
+            message:"Enter Correct Password or Confirm Email id"
+        }
+        
+        req.session.save(function()
+        {
+            return res.redirect('/signup')
+        })
+
+        return;
+       
+    }
+    
+
+    const emailCheck=await db.getDb().collection('users').findOne({email:email});
+
+    if(emailCheck)
+    {
+        req.session.tempData={
+            fname:fname,
+            lname:lname,
+            email:email,
+            confirmEmail:confirmEmail,
+            password:password,
+            message:"Email Already Exists.Try Sign in"
+        }
+        
+        req.session.save(function()
+        {
+            return res.redirect('/signup')
+        })
+
+        return;
+    }
+
+    let hashedPassword=await bcrypt.hash(password,12)
+    await db.getDb().collection('users').insertOne({fname:fname,lname:lname,email:email,confirmEmail:confirmEmail,password:hashedPassword});
+
+    res.redirect('/login');
+    
+
+}
+
+exports.profile=async (req,res)=>
+{
+   let user=req.session.user;
+   if(user)
+   {
+    let userData=await db.getDb().collection('users').findOne({email:user.email})
+    let blogsData=await db.getDb().collection('blogs').find({email:user.email}).toArray();
+    return res.render('profile',{userData:userData,blogsData:blogsData});
+   }
+
+   res.render('profile',{userData:null,blogsData:null})
+   
+}
+
+exports.logout=async (req,res)=>
+{
+    req.session.user=null;
+
+    res.redirect('/login');
 }
 
 // let obj =

@@ -19,7 +19,7 @@
 
 <div class="px-3 py-2 bg-white text-black total">
     <div class="logo">
-        BLOGS||
+       <a href="/home" style="text-decoration: none;color:black"> BLOGS|| </a>
     </div>
     <div class="container">
 
@@ -29,27 +29,39 @@
           <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
         </a>
         
-        <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+        <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small nav-buttons">
+          <% if(locals.isAuthenticated==true){  %>
+        
+            <!-- <li>
+             
+            </li> -->
+            <div class="dropdown">
+              <a href=""> <img src="img/profile.jpg" alt="" height="50px" width="50px"> </a> 
+              <div class="dropdown-content">
+                <a href="/profile" style="font-size: 15px;">Profile</a>
+                <a href="/logout"  style="font-size: 15px;">Logout</a>
+              </div>
+            </div>
+
+               
             
-          <li>
-            <a href="https://github.com/saswatdas121" class="nav-link text-secondary">
-                <img src="/img/github.png" alt="" style="height: 40px; width: 40px;">
-              
-            </a>
+            <% } else {  %>
+
+          <li style="margin: 0px 20px;">
+          <a href="/login"> Login</a>
           </li>
           <li>
-            <a href="https://www.linkedin.com/in/saswat-jyoti-das-9b5540271/" class="nav-link text-black">
-              <img src="/img/linkedin.png" alt="" style="height: 40px; width: 40px;">
-             
-            </a>
+            <a href="/signup"> Signup</a>
           </li>
-          <li>
-            <a href="#" class="nav-link text-black">
-                <img src="/img/twitter.png" alt="" style="height: 40px; width: 40px;">
-             
-            </a>
-          </li>
+        
+
+          <% } %>
+
+          
+          
+          
         </ul>
+        
       </div>
     </div>
   </div>
@@ -57,11 +69,15 @@
     <ul class="links">
             <li><a href="/home">Home</a> </li>
             <li><a href="/categories">Blogs</a> </li>
+            <% if(locals.isAuthenticated==true) { %>
             <li><a href="/submit">Write your blog</a> </li>
+            <% }  %>
             <li><a href="/about">About me</a> </li>
       
         </ul>
   </div>
+
+  
 </header>
 </body>
 </html>
