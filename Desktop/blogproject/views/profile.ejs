@@ -10,60 +10,50 @@
           <div class="card">
             <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
               <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                <img src="img/userPhoto.jpg"
                   alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
                   style="width: 150px; z-index: 1">
                 <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
-                  style="z-index: 1;">
+                  style="z-index: 1;font-family: 'Maven Pro', sans-serif;">
                   Edit profile
                 </button>
               </div>
               <div class="ms-3" style="margin-top: 130px;">
-                <h5><%= userData===null?'Guest':userData.fname+' '+userData.lname%></h5>
+                <h5 style="font-family: 'Maven Pro', sans-serif;"><%= userData===null?'Guest':userData.fname+' '+userData.lname%></h5>
               </div>
             </div>
             <div class="p-4 text-black" style="background-color: #f8f9fa;">
               <div class="d-flex justify-content-end text-center py-1">
-                <div>
-                  <p class="mb-1 h5">253</p>
-                  <p class="small text-muted mb-0">Photos</p>
-                </div>
-                <div class="px-3">
-                  <p class="mb-1 h5">1026</p>
-                  <p class="small text-muted mb-0">Followers</p>
-                </div>
-                <div>
-                  <p class="mb-1 h5">478</p>
-                  <p class="small text-muted mb-0">Following</p>
-                </div>
+               
               </div>
             </div>
             <div class="card-body p-4 text-black">
-              <div class="mb-5">
-                <p class="lead fw-normal mb-1">About</p>
-                <div class="p-4" style="background-color: #f8f9fa;">
-                  <p class="font-italic mb-1">Web Developer</p>
-                  <p class="font-italic mb-1">Lives in New York</p>
-                  <p class="font-italic mb-0">Photographer</p>
-                </div>
-              </div>
-              <div class="d-flex justify-content-between align-items-center mb-4">
-                <p class="lead fw-normal mb-0">Your Blogs</p>
+              
+              <div class="d-flex justify-content-between align-items-center mb-4" style="margin-top:40px">
+                <p class="lead fw-normal mb-0" style="font-family: 'Maven Pro', sans-serif;">Your Blogs</p>
                 <p class="mb-0"><a href="#!" class="text-muted">Show all</a></p>
               </div>
               <% if(!blogsData) {  %>
                
-                <div>No Blogs are there.You can contribute by clicking on Write a Blog</div>
+                <div style="font-family: 'Maven Pro', sans-serif;">No Blogs are there.You can contribute by clicking on Write a Blog</div>
 
               <% } else { %>
-              <% for(let data of blogsData) {  %>
-              <div class="row g-2">
-                <div class="col mb-2" style="display:flex;flex-direction: column;">
-                  <img src="<%= data.imagePath %>" alt="image 1" style="height: 200px;width: 200px;">
-                  <div style="font-family: 'Montserrat', sans-serif;font-size: 13px;font-weight: bold;"><%= data.title %></div>
-                </div>
-              </div>
+             
+                <div class="d-flex p-3 ">
+                <% for(let data of blogsData) {  %>
+                  
+                    <div class="p-2">
+                      <div class="p-2 bd-highlight" style="display:flex;flex-direction: column;font-family: 'Maven Pro', sans-serif;">
+                        <a href="blogs/<%= data._id %>" style="color: black;"><img src="<%= data.imagePath %>" alt="image 1" style="height: 200px;width: 200px;">
+                         <div style="font-family: 'Montserrat', sans-serif;font-size: 13px;font-weight: bold;text-align: center;"><%= data.title %></div>
+                       </div></a> 
+                     </div>
+                    
+                    
+            
               <%  }  }%>
+
+                </div>
              
             </div>
           </div>

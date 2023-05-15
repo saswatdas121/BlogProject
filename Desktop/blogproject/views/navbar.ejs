@@ -30,13 +30,11 @@
         </a>
         
         <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small nav-buttons">
-          <% if(locals.isAuthenticated==true){  %>
+          <% if(locals.isAuthenticated|| locals.isGoogleAuthenticated){%>
         
-            <!-- <li>
-             
-            </li> -->
             <div class="dropdown">
-              <a href=""> <img src="img/profile.jpg" alt="" height="50px" width="50px"> </a> 
+              Hello   
+              <a href=""> <img src="/img/profile.jpg" alt="" height="50px" width="50px"> </a> 
               <div class="dropdown-content">
                 <a href="/profile" style="font-size: 15px;">Profile</a>
                 <a href="/logout"  style="font-size: 15px;">Logout</a>
@@ -72,7 +70,7 @@
             <% if(locals.isAuthenticated==true) { %>
             <li><a href="/submit">Write your blog</a> </li>
             <% }  %>
-            <li><a href="/about">About me</a> </li>
+            <li><a href="/about">About Us</a> </li>
       
         </ul>
   </div>

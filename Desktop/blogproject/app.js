@@ -4,6 +4,8 @@ const path=require('path');
 const db=require('./server/models/database');
 const session=require('express-session');
 const mongodbStore=require('connect-mongodb-session');
+const passportSetup=require('./server/models/passport-setup')
+const passport=require('passport')
 
 app.use(express.urlencoded({ extended: false }));
 app.set('view engine','ejs');
@@ -34,21 +36,23 @@ app.use(session(
         store:sessionStore,
     }    
 ))
+
+app.use(passport.initialize());
+app.use(passport.session());//this calls deserialize which in turn attach the user object 
+//to the request as req.user making it accessible in our request handling.
+
 app.use(function(req,res,next)
 {
-    let isAuthenticated=req.session.user;
-
-    if(isAuthenticated==null)
+    if(req.session.user || req.user)
     {
-        return next();
+        res.locals.isAuthenticated=true;
     }
-
-    res.locals.isAuthenticated=true;
 
     next();
 
 
-})
+
+})//Run for every request
 
 app.use('/',routes);//It checks for all routes which starts with /.
 

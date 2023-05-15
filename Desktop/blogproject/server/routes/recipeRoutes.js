@@ -3,6 +3,7 @@
 const express=require('express');
 const router=express.Router();//Express Routers are a way to organize your Express application such that your primary app.js file does not become bloated and difficult to reason about
 const blogsController=require('../controllers/blogsController');
+const passport=require('passport')
 
 const path=require('path');
 
@@ -51,5 +52,22 @@ router.post('/signupuser',blogsController.signupUser);
 router.get('/profile',blogsController.profile);
 
 router.get('/logout',blogsController.logout);
+
+router.get('/guest',blogsController.guest);
+
+router.get('/google',passport.authenticate("google",
+{
+  scope:['profile','email']//Which items are accessible from the user
+}));//1)First when we sign in with google browser(/auth/google) then we need to handle the request in our node application.Then we need to grant permission from the user by sending them a consent screen
+
+
+//passport.authenticate('google') sending the consent screen to the user.Passport object calls Google strategy 
+
+ router.get('/auth/google/redirect',passport.authenticate('google'),blogsController.googleAuthentication)
+
+//2)When user granted a permission then it redirects to a callback route.Google gives us a code in the redirect uri.Then Google gives a code in URI.We can tell passport for exchanging the code by profile info.
+//A middleware set up so that when user gives its consent we can take the data and render accordingly 
+
+
 
 module.exports=router; 
